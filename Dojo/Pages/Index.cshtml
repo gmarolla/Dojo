@@ -1,0 +1,29 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+
+
+}
+
+<h2>Add Person</h2>
+    <div class="col-md-4">
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="person.Name" class="control-label"></label>
+                <input asp-for="person.Name" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="person.Surname" class="control-label"></label>
+                <input asp-for="person.Surname" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="person.DateOfBirth"  class="control-label"></label>
+                <input asp-for="person.DateOfBirth"  type="date">
+            </div>
+            <div class="form-group">
+                <button  value="Create" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+
+    </div>
