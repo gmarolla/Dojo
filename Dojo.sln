@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31313.79
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dojo", "Dojo\Dojo.csproj", "{5DB2A556-9DBA-49FB-93ED-BE9463413484}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dojo", "Dojo\Dojo.csproj", "{5DB2A556-9DBA-49FB-93ED-BE9463413484}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dojo NunitTest", "Dojo NunitTest\Dojo NunitTest.csproj", "{FB0CBE0F-1663-4DF3-B922-6F25199685ED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{5DB2A556-9DBA-49FB-93ED-BE9463413484}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5DB2A556-9DBA-49FB-93ED-BE9463413484}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5DB2A556-9DBA-49FB-93ED-BE9463413484}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB0CBE0F-1663-4DF3-B922-6F25199685ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB0CBE0F-1663-4DF3-B922-6F25199685ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB0CBE0F-1663-4DF3-B922-6F25199685ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB0CBE0F-1663-4DF3-B922-6F25199685ED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
