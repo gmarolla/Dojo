@@ -1,38 +1,35 @@
 ﻿using Dojo.Controller;
 using Dojo.Models;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Data;
 
 namespace Dojo.Pages
 {
-    public class IndexModel : PageModel
+    public class PersonGridViewModel : PageModel
     {
         public PersonEntity person;
-        public PersonController controller;
-        private readonly ILogger<IndexModel> _logger;
+        public PersonListController controller;
+        private readonly ILogger<PersonGridViewModel> _logger;
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public PersonGridViewModel(ILogger<PersonGridViewModel> logger)
         {
             _logger = logger;
-            controller = new PersonController();
+            controller = new PersonListController();
         }
 
         public void OnGet()
         {
+            controller.RetrieveListOfPersons();
         }
+        public DataTable ReadDataTable()
+        {
+            return controller.RetrieveListOfPersons();
 
+        }
         public void OnPost()
         {
-            controller.CreatePerson(Request.Form["person.Name"], Request.Form["person.Surname"], DateTime.Parse(Request.Form["person.DateOfBirth"].ToString()));
+            controller.RetrieveListOfPersons();
         }
-
-
-
     }
 }

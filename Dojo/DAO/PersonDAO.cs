@@ -1,6 +1,7 @@
 ﻿using Dojo.Models;
 using System;
 using System.Data;
+using System.Data.Common;
 using System.Data.SqlClient;
 
 namespace Dojo.DAO
@@ -26,20 +27,50 @@ namespace Dojo.DAO
                     int id = (int)command.ExecuteScalar();
                     newPerson = new PersonEntity(id, FirstName, SecondName, DateOfBirth);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                    throw new Exception("Cannot create person",ex);
+                    throw new Exception("Cannot create person", ex);
                 }
                 finally
                 {
-                    if(connection.State != ConnectionState.Closed)
+                    if (connection.State != ConnectionState.Closed)
                     {
                         connection.Close();
                     }
                 }
             }
-
             return newPerson;
+        }
+        public DataTable GetDataTable()
+        {
+            string RetrieveAllPerons = "SELECT * FROM PERSON ";
+            DataTable table = new DataTable();
+
+            using (SqlConnection connection = new SqlConnection(Connection.connectionString))
+            {
+                SqlCommand command = new SqlCommand(RetrieveAllPerons, connection);
+
+                try
+                {
+                    connection.Open();
+                    using (SqlDataAdapter da = new SqlDataAdapter(command))
+                    {
+                        da.Fill(table);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Cannot create person", ex);
+                }
+                finally
+                {
+                    if (connection.State != ConnectionState.Closed)
+                    {
+                        connection.Close();
+                    }
+                }
+            }
+            return table;
         }
     }
 }
