@@ -57,5 +57,19 @@ namespace Dojo_NunitTest
             mockDbConnection.Verify(x => x.Open(), Times.Exactly(1));
 
         }
+        [Test]
+        public void CreatePerson_Colseconnextion()
+        {
+            //given
+            string FirstName = "Giuseppe";
+            string LastName = "Marolla";
+            DateTime DateOfBirth = new DateTime(1989, 07, 14);
+
+            mockDbConnection.Setup(x => x.State).Returns(ConnectionState.Open);
+            //when
+            PersonEntity personActual = personDAO.CreatePerson(FirstName, LastName, DateOfBirth);
+            //then
+            mockDbConnection.Verify(x => x.Close(), Times.Exactly(1));
+        }
     }
 }
