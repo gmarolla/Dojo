@@ -1,6 +1,7 @@
 ﻿using Dojo.Models;
 using Dojo.Services;
 using System;
+using System.Data;
 
 namespace Dojo.Controller
 {
@@ -11,6 +12,10 @@ namespace Dojo.Controller
         public PersonEntity CreatePerson(string FirstName, string SecondName, DateTime DateOfBirth)
         {
             return personService.CreatePerson(FirstName, SecondName, DateOfBirth);
+        }
+        public DataTable RetrieveListOfPersons()
+        {
+            return personService.RetrieveListOfPersons();
         }
     }
 }

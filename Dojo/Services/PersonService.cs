@@ -1,9 +1,7 @@
 ﻿using Dojo.DAO;
 using Dojo.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Data;
 
 namespace Dojo.Services
 {
@@ -13,6 +11,10 @@ namespace Dojo.Services
         public PersonEntity CreatePerson(string FirstName, string SecondName, DateTime DateOfBirth)
         {
             return personDao.CreatePerson(FirstName,SecondName,DateOfBirth);
+        }
+        public DataTable RetrieveListOfPersons()
+        {
+            return personDao.GetDataTable();
         }
     }
 }

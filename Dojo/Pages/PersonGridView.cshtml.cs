@@ -9,13 +9,13 @@ namespace Dojo.Pages
     public class PersonGridViewModel : PageModel
     {
         public PersonEntity person;
-        public PersonListController controller;
+        public PersonController controller;
         private readonly ILogger<PersonGridViewModel> _logger;
 
         public PersonGridViewModel(ILogger<PersonGridViewModel> logger)
         {
             _logger = logger;
-            controller = new PersonListController();
+            controller = new PersonController();
         }
 
         public void OnGet()
