@@ -1,4 +1,5 @@
 ﻿using Dojo.Models;
+using Dojo.Services;
 using System;
 using System.Data;
 using System.Data.SqlClient;
@@ -7,19 +8,44 @@ namespace Dojo.DAO
 {
     public class PersonDAO
     {
+        private IConnectionManager connectionManager;
+        public PersonDAO()
+        {
+            connectionManager = new ConnectionManager();
+        }
+
+        public PersonDAO(IConnectionManager connectionManager)
+        {
+            this.connectionManager = connectionManager;
+        }
+
         public PersonEntity CreatePerson(string FirstName, string SecondName, DateTime DateOfBirth)
         {
             string InsertCommand = "INSERT INTO PERSON (NAME,SURNAME,DATEOFBIRTH) values (@name,@surname,@dateOfBirth); " +
                 "SELECT current_value FROM sys.sequences WHERE name = 'person_counter' ; ";
 
             PersonEntity newPerson = null;
-
-            using (SqlConnection connection = new SqlConnection(Connection.connectionString))
+            
+            using (IDbConnection connection = connectionManager.CreateConnection())
             {
-                SqlCommand command = new SqlCommand(InsertCommand, connection);
-                command.Parameters.AddWithValue("name", FirstName);
-                command.Parameters.AddWithValue("surname", SecondName);
-                command.Parameters.Add("dateOfBirth", SqlDbType.DateTime).Value = DateOfBirth;
+                IDbCommand command = connection.CreateCommand();
+                command.CommandText = InsertCommand;
+                IDbDataParameter parameter = command.CreateParameter();
+                parameter.ParameterName = "name";
+                parameter.Value = FirstName;
+                command.Parameters.Add(parameter);
+
+                IDbDataParameter parameterSurname = command.CreateParameter();
+                parameterSurname.ParameterName = "surname";
+                parameterSurname.Value = SecondName;
+                command.Parameters.Add(parameterSurname);
+
+                IDbDataParameter parameterDate = command.CreateParameter();
+                parameterDate.ParameterName = "dateOfBirth";
+                parameterDate.Value = DateOfBirth;
+                parameterDate.DbType = DbType.DateTime;
+                command.Parameters.Add(parameterDate);
+
                 try
                 {
                     connection.Open();
